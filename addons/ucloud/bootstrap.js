@@ -1,5 +1,4 @@
-define([], function () {
-    //如果开启了ucloud客户端上传模式
+//如果开启了ucloud客户端上传模式
 if (typeof Config.upload.storage !== 'undefined' && Config.upload.storage === 'ucloud') {
     require(['upload', '../addons/ucloud/js/spark'], function (Upload, SparkMD5) {
         var _onFileAdded = Upload.events.onFileAdded;
@@ -79,4 +78,3 @@ if (typeof Config.upload.storage !== 'undefined' && Config.upload.storage === 'u
         };
     });
 }
-});
