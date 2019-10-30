@@ -65,9 +65,9 @@ class TokenHepler
 
     static function getUserToken($openid)
     {
-        // TODO 获取数据库内容 返回array
-
-        return $openid;
+        $user = WechatUser::get(['openid' => $openid]);
+        $token = $user->token;
+        return $token;
     }
 
     static function validateToken($token)
