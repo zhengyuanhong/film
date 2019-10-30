@@ -25,9 +25,10 @@ class TokenHepler
         return $jwt_token;
     }
 
-    static function freshToken($token){
+    static function freshToken($token)
+    {
         JWT::$leeway = self::LEEWAY;
-        $decoded = JWT::decode($token,self::key,['HS256']);
+        $decoded = JWT::decode($token, self::key, ['HS256']);
         $decoded_array = (array)$decoded;
         $new_token = self::getToken($decoded_array['uuid']);
 
@@ -36,9 +37,11 @@ class TokenHepler
         return $new_token;
     }
 
-    static function saveOrUpdateUserToken($openid){
+    static function saveOrUpdateUserToken($openid, $option = 'save')
+    {
         //TODO 把token 存入数据库中
-       return true;
+        return true;
+
     }
 
     static function getUserToken($openid)
@@ -52,14 +55,14 @@ class TokenHepler
     {
         JWT::$leeway = self::LEEWAY;
         try {
-            $decoded = JWT::decode($token,self::key,['HS256']);
+            $decoded = JWT::decode($token, self::key, ['HS256']);
             $decoded_array = (array)$decoded;
             $cacheJwt = self::getUserToken($decoded_array['uuid']);
-            if($token !== $cacheJwt){
+            if ($token !== $cacheJwt) {
                 return false;
             }
-        }catch (\Exception $e){
-            Log::error('token 错误:'.$token.'||'.$e->getMessage());
+        } catch (\Exception $e) {
+            Log::error('token 错误:' . $token . '||' . $e->getMessage());
             return false;
         }
     }
