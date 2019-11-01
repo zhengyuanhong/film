@@ -1,14 +1,14 @@
 <?php
 
-namespace helper;
+namespace app\api\helper;
 
-use firebase\JWT;
+use \firebase\JWT;
 use think\Log;
 use app\admin\model\WechatUser;
 
-class TokenHepler
+class TokenHelper
 {
-    const DURATION = 31536000; // 86400 * 365 = 31536000
+    const DURATION = 180; //31536000; // 86400 * 365 = 31536000
     const LEEWAY = 60; // $leeway in seconds
     const key = 'zhengyuanhong';
 
@@ -23,7 +23,7 @@ class TokenHepler
         Log::info('token存入数据库');
         $jwt_token = JWT::encode($token, self::key);
 
-        self::saveOrUpdateUserToken($openid,$jwt_token);
+        self::saveOrUpdateUserToken($openid, $jwt_token);
 
         return $jwt_token;
     }
@@ -33,27 +33,15 @@ class TokenHepler
         JWT::$leeway = self::LEEWAY;
         $decoded = JWT::decode($token, self::key, ['HS256']);
         $decoded_array = (array)$decoded;
-        $new_token = self::getToken($decoded_array['uuid']);
+        $new_token = self::genToken($decoded_array['uuid']);
 
-        self::saveOrUpdateUserToken($decoded_array['uuid'],$new_token,'update');
+        self::saveOrUpdateUserToken($decoded_array['uuid'], $new_token, 'update');
 
         return $new_token;
     }
 
     static function saveOrUpdateUserToken($openid, $token, $option = 'save')
     {
-        if ($option == 'save') {
-            /** @var WechatUser $user */
-            $user = WechatUser::get(['openid' => $openid]);
-            if (empty($user)) {
-                Log::info('新建用户, openid=' . $openid);
-                $user = new WechatUser();
-                $user->openid = $openid;
-                $user->token = $token;
-                $user->save();
-                return true;
-            }
-        }
 
         if ($option == 'update') {
             $user = new Wechatuser();

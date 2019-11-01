@@ -1,9 +1,12 @@
 <?php
-namespace helper;
 
+namespace app\api\helper;
+
+use app\admin\model\WechatUser as User;
 use think\Log;
 
-class WechatHelper{
+class WechatHelper
+{
 
     static function grantOpenID($code, $appid, $secret)
     {
@@ -33,15 +36,33 @@ class WechatHelper{
         }
 
         $result = json_decode($response, true);
+
         if (empty($result['openid'])) {
-            Log::error('登录凭证校验 - 错误，没有获得 openid、session_key', $result);
+            Log::error('登录凭证校验 - 错误，没有获得 openid、session_key');
             return [];
         }
 
         if (isset($result['unionid'])) {
-            Log::info('产生 unionid', $result);
+            Log::info('产生 unionid' . $result);
         }
 
-        return $result;
+        $data['token'] = TokenHelper::genToken($result['openid']);
+        $data['openid'] = $result['openid'];
+
+        /** @var User $user */
+        $user = User::get(['openid' => $result['openid']]);
+        if (empty($user)) {
+            Log::info('新建用户, openid=' . $result['openid']);
+            $user = new User();
+            $user->openid = $result['openid'];
+            $user->token = $data['token'];
+            $user->save();
+        } else {
+            $user = new User();
+            $user->where('openid', $data['openid'])
+                ->update(['token' => $data['token']]);
+        }
+
+        return $data;
     }
 }
