@@ -23,22 +23,22 @@ class Api extends Controller
             $jwt = $this->request->header('AUTH-TOKEN');
             $result = TokenHelper::validateToken($jwt);
             if($result == false){
-                die('非法请求!');
+                die('202');
             }
-            $this->request = WechatUser::get(['openid'=>$result['uuid']]);
+            $this->request->user = WechatUser::get(['openid'=>$result['uuid']]);
         }
     }
 
-    function own_result($data = [])
+    function own_result($res = [])
     {
         $data = [
             'error_code' => '0000',
             'error_message' => 'success',
-            'data' => $data,
+            'data' => $res,
             'server_time' => time(),
         ];
 
-        return json([$data, 200, ['Allow-Origin' => '*']]);
+        return json($data, 200, ['Allow-Origin' => '*']);
     }
 
     function own_error($error_code, $customMessage = '')
@@ -51,7 +51,7 @@ class Api extends Controller
             'server_time' => time(),
         ];
 
-        return json([$data, 200, ['Allow-Origin' => '*']]);
+        return json([$data, 200, 'Allow-Origin' => '*']);
     }
 
 }

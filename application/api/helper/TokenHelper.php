@@ -23,32 +23,7 @@ class TokenHelper
         Log::info('token存入数据库');
         $jwt_token = JWT::encode($token, self::key);
 
-        self::saveOrUpdateUserToken($openid, $jwt_token);
-
         return $jwt_token;
-    }
-
-    static function freshToken($token)
-    {
-        JWT::$leeway = self::LEEWAY;
-        $decoded = JWT::decode($token, self::key, ['HS256']);
-        $decoded_array = (array)$decoded;
-        $new_token = self::genToken($decoded_array['uuid']);
-
-        self::saveOrUpdateUserToken($decoded_array['uuid'], $new_token, 'update');
-
-        return $new_token;
-    }
-
-    static function saveOrUpdateUserToken($openid, $token, $option = 'save')
-    {
-
-        if ($option == 'update') {
-            $user = new Wechatuser();
-            $user->where('openid', $openid)->update(['token', $token]);
-            return true;
-        }
-        return false;
     }
 
     static function getUserToken($openid)
