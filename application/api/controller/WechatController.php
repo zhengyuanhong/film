@@ -2,10 +2,8 @@
 
 namespace app\api\controller;
 
-use app\api\helper\TokenHelper;
 use app\common\controller\Api;
 use app\api\helper\WechatHelper;
-use app\admin\model\WechatUser as User;
 use think\Request;
 
 class WechatController extends Api
