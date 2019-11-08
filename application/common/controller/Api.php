@@ -4,7 +4,6 @@ namespace app\common\controller;
 
 use app\admin\model\WechatUser;
 use app\api\helper\TokenHelper;
-use app\api\helper\WechatHelper;
 use think\Controller;
 use think\Request;
 
@@ -20,12 +19,12 @@ class Api extends Controller
         $this->request = Request::instance();
         $action = $this->request->action();
         if(!in_array($action,$this->allow)){
-            $jwt = $this->request->header('AUTH-TOKEN');
+            $jwt = $this->request->header('AUTH-ALLOW');
             $result = TokenHelper::validateToken($jwt);
             if($result == false){
                 die('202');
             }
-            $this->request = WechatUser::get(['openid'=>$result['uuid']]);
+            $this->request->user = WechatUser::get(['openid'=>$result['uuid']]);
         }
     }
 
@@ -43,9 +42,9 @@ class Api extends Controller
 
     function own_error($error_code, $customMessage = '')
     {
-        $message = $customMessage ? $customMessage : $error_code['code'];
+        $message = $customMessage ? $customMessage : $error_code;
         $data = [
-            'error_code' => $error_code['code'],
+            'error_code' => $error_code,
             'error_message' => $message,
             'data' => [],
             'server_time' => time(),

@@ -5,11 +5,11 @@ namespace app\admin\model;
 use think\Model;
 
 
-class WechatUser extends Model
+class Team extends Model
 {
+    // 表名
+    protected $table = 'team';
 
-    protected $table = 'wechat_user';
-    
     // 自动写入时间戳字段
     protected $autoWriteTimestamp = 'int';
 
@@ -22,14 +22,16 @@ class WechatUser extends Model
     protected $append = [
 
     ];
-    
 
-    
+    public function getUpdateTimeAttr($value)
+    {
+        return date("Y-m-d H:i:s", $value);
+    }
 
-
-
-
-
+    public function getCreateTimeAttr($value)
+    {
+        return date("Y-m-d H:i:s", $value);
+    }
 
 
 }

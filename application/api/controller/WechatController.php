@@ -17,7 +17,7 @@ class WechatController extends Api
     {
         $code = $request->get('code');
         if (empty($code)) {
-            return $this->own_error(['code' => 40001], '未接收到参数');
+            return $this->own_error( 40001, '未接收到参数');
         }
 
         $appid = config('wechat.appid');
@@ -25,10 +25,5 @@ class WechatController extends Api
         $ret = WechatHelper::grantOpenID($code, $appid, $secret);
 
         return $this->own_result($ret);
-    }
-
-    function test()
-    {
-        echo 'test';
     }
 }

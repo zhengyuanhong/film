@@ -5,12 +5,12 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    index_url: 'wechat_user/index' + location.search,
-                    add_url: 'wechat_user/add',
-                    edit_url: 'wechat_user/edit',
-                    del_url: 'wechat_user/del',
-                    multi_url: 'wechat_user/multi',
-                    table: 'wechat_user',
+                    index_url: 'picture/index' + location.search,
+                    add_url: 'picture/add',
+                    edit_url: 'picture/edit',
+                    del_url: 'picture/del',
+                    multi_url: 'picture/multi',
+                    table: 'picture',
                 }
             });
 
@@ -25,12 +25,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {checkbox: true},
                         {field: 'id', title: __('Id')},
-                        {field: 'username', title: __('Username')},
-                        {field: 'useravatarurl', title: __('Useravatarurl'), formatter: Table.api.formatter.url},
-                        {field: 'openid', title: __('Openid')},
-                        {field: 'token', title: __('Token')},
-                        {field: 'updatetime', title: __('Updatetime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
-                        {field: 'createtime', title: __('Createtime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
+                        {field: 'category', title: __('Category'), searchList: {"1":__('Category 1'),"2":__('Category 2'),"3":__('Category 3')}, formatter: Table.api.formatter.normal},
+                        {field: 'img_url', title: __('Img_url'), formatter: Table.api.formatter.url},
+                        {field: 'showswitch', title: __('Showswitch'), formatter: Table.api.formatter.toggle},
+                        {field: 'updatetime', title: __('Updatetime'), operate:'RANGE', addclass:'datetimerange'},
+                        {field: 'createtime', title: __('Createtime'), operate:'RANGE', addclass:'datetimerange'},
                         {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}
                     ]
                 ]

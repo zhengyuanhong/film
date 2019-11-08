@@ -8,7 +8,7 @@ use app\admin\model\WechatUser;
 
 class TokenHelper
 {
-    const DURATION = 180; //31536000; // 86400 * 365 = 31536000
+    const DURATION = 31536000; // 86400 * 365 = 31536000
     const LEEWAY = 60; // $leeway in seconds
     const key = 'zhengyuanhong';
 
@@ -55,6 +55,7 @@ class TokenHelper
     {
         $user = WechatUser::get(['openid' => $openid]);
         $token = $user->token;
+        Log::info('============token======'.$token);
         return $token;
     }
 
@@ -72,6 +73,7 @@ class TokenHelper
             Log::error('token 错误:' . $token . '||' . $e->getMessage());
             return false;
         }
+        return $decoded_array;
     }
 }
 
