@@ -6,7 +6,6 @@ use app\admin\model\Focus;
 use app\admin\model\Video;
 use app\common\controller\Api;
 use think\Request;
-use think\Validate;
 
 class VideoController extends Api
 {
@@ -82,7 +81,7 @@ class VideoController extends Api
 
 
 //        $res = Focus::where('user_id', $request->user->id)->where('video_id', $data['id'])->find();
-        $data['is_collect'] = Focus::isCollect($request->user->id,$data['id'])? true : false;
+        $data['is_collect'] = Focus::isCollect($request->user->id, $data['id']) ? true : false;
         $data['user'] = $video_content->team;
         return $this->own_result($data);
     }
@@ -106,5 +105,29 @@ class VideoController extends Api
 
         Focus::isOrNoCollect($request->user->id, $video_id);
         return $this->own_result();
+    }
+
+    public function getCollect(Request $request)
+    {
+
+        $page = $request->get('page', 1);
+        $pages_size = $request->get('page_size', 20);
+
+        /** @var Video $query */
+        $query = new Focus();
+        $total = $query->where('user_id', $request->user->id)->count();
+
+        $data = [];
+
+        $offset = ($page - 1) * $pages_size;
+
+        if ($offset + 1 > $total) {
+            return $this->own_result($data);
+        }
+        $res = $query->where('user_id', $request->user->id)->limit($offset, $pages_size)->select();
+        foreach ($res as $v) {
+            $data[] = Video::get($v['video_id']);
+        }
+        return $this->own_result($data);
     }
 }

@@ -18,23 +18,36 @@ class Focus extends Model
     protected $updateTime = 'updatetime';
     protected $deleteTime = false;
 
-    static function isOrNoCollect($user_id,$video_id){
-        $res = self::where('user_id',$user_id)->where('video_id',$video_id)->find();
-        if(empty($res)){
+    static function isOrNoCollect($user_id, $video_id)
+    {
+        $res = self::where('user_id', $user_id)->where('video_id', $video_id)->find();
+        if (empty($res)) {
             $res = new self;
             $res->user_id = $user_id;
             $res->video_id = $video_id;
             $res->save();
-        }else{
+
+            $video = Video::get($video_id);
+            $video->setInc('collet_num', rand(1, 10));
+            $video->save();
+        } else {
             $res->delete();
         }
     }
 
-    static function isCollect($user_id,$video_id){
-        $res = self::where('user_id',$user_id)->where('video_id',$video_id)->find();
-        if(!empty($res)){
+    static function isCollect($user_id, $video_id)
+    {
+        $res = self::where('user_id', $user_id)->where('video_id', $video_id)->find();
+        if (!empty($res)) {
             return true;
         }
+    }
+
+    static function Collects($user_id)
+    {
+        $data = [];
+
+        return $data;
     }
 }
 

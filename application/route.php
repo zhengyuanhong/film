@@ -9,6 +9,7 @@ Route::get('/get-more-imgs','api/PictureController/getimgs');
 
 Route::get('/get-videos','api/VideoController/indexvideos');
 Route::get('/get-more-videos','api/VideoController/getvideos');
+Route::get('/get-collect','api/VideoController/getcollect');
 Route::get('/get-video-content','api/VideoController/getvideocontent');
 Route::post('/collect','api/VideoController/collect');
 
