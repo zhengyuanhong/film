@@ -128,8 +128,14 @@ class VideoController extends Api
         if(empty($res)){
             return $this->own_result($data);
         }
+        /** @var Focus $v */
         foreach ($res as $v) {
-            $data[] = Video::get($v['video_id']);
+            $video_res = Video::get($v['video_id']);
+            if(empty($video_res)){
+                $v->delete();
+            }else{
+                $data[] = $video_res;
+            }
         }
         return $this->own_result($data);
     }
