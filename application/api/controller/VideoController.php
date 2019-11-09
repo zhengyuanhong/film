@@ -125,6 +125,9 @@ class VideoController extends Api
             return $this->own_result($data);
         }
         $res = $query->where('user_id', $request->user->id)->limit($offset, $pages_size)->select();
+        if(empty($res)){
+            return $this->own_result($data);
+        }
         foreach ($res as $v) {
             $data[] = Video::get($v['video_id']);
         }

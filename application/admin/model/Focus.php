@@ -42,13 +42,6 @@ class Focus extends Model
             return true;
         }
     }
-
-    static function Collects($user_id)
-    {
-        $data = [];
-
-        return $data;
-    }
 }
 
 
