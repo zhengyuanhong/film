@@ -44,6 +44,9 @@ class PictureController extends  Api{
         }
 
         $rows = $query->where('category',$type)->where('showswitch',1)->limit($offset,$pages_size)->order('updatetime','desc')->select();
+        if(empty($rows)){
+            return $this->own_result($data);
+        }
         /** @var Picture $v */
         foreach($rows as $v){
             $data[] = $v->toArray();

@@ -51,6 +51,10 @@ class VideoController extends Api
         }
 
         $rows = $query->where('category', $type)->limit($offset, $pages_size)->order('updatetime', 'desc')->select();
+        if(empty($rows)){
+            return $this->own_result($data);
+        }
+
         /** @var Video $v */
         foreach ($rows as $v) {
             $data[] = $v->toArray();
