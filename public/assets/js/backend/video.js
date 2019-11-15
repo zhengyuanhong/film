@@ -26,7 +26,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {checkbox: true},
                         {field: 'id', title: __('Id')},
                         {field: 'team_uid', title: __('Team_uid')},
-                        {field: 'category', title: __('Category'), searchList: {"1":__('Category 1'),"2":__('Category 2')}, formatter: Table.api.formatter.normal},
+                        {field: 'category', title: __('Category'), searchList: {"1":__('Category 1'),"2":__('Category 2'),"3":__('Category 3')}, formatter: Table.api.formatter.normal},
                         {field: 'video_name', title: __('Video_name')},
                         {field: 'video_cover', title: __('Video_cover')},
                         {field: 'video_pid', title: __('Video_pid')},

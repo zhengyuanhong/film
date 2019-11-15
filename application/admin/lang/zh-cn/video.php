@@ -3,9 +3,10 @@
 return [
     'Id'            => 'id',
     'Team_uid'      => '用户名',
-    'Category'      => '分类',
+    'Category'      => '视频分类',
     'Category 1'      => '婚礼',
     'Category 2'      => '宣传片',
+    'Category 3'      => '其他',
     'Video_name'    => '视频名称',
     'Video_content' => '视频描述',
     'Video_cover'   => '视频封面',

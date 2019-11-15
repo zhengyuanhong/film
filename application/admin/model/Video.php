@@ -8,9 +8,10 @@ use think\Model;
 class Video extends Model
 {
 
+
     // 表名
     protected $table = 'video';
-    
+
     // 自动写入时间戳字段
     protected $autoWriteTimestamp = 'int';
 
@@ -24,9 +25,10 @@ class Video extends Model
         'category_text'
     ];
 
+
     public function getCategoryList()
     {
-        return ['1' => __('Category 1'), '2' => __('Category 2')];
+        return ['1' => __('Category 1'), '2' => __('Category 2'), '3' => __('Category 3')];
     }
 
 
@@ -37,8 +39,20 @@ class Video extends Model
         return isset($list[$value]) ? $list[$value] : '';
     }
 
-    public function team(){
-        return $this->hasOne('Team','id','team_uid');
+    public function team()
+    {
+        return $this->hasOne('Team', 'id', 'team_uid');
     }
+    public function getUpdateTimeAttr($value)
+    {
+        return date("Y-m-d H:i:s", $value);
+    }
+
+    public function getCreateTimeAttr($value)
+    {
+        return date("Y-m-d H:i:s", $value);
+    }
+
+
 
 }
