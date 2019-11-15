@@ -14,7 +14,7 @@ class PictureController extends  Api{
 
     public function indexImgs(Request $request){
         $picture = new Picture();
-        $res = $picture->where('showswitch',1)->limit(10)->order('updatetime','desc')->select();
+        $res = $picture->where('showswitch',1)->where('category','<>','1')->limit(10)->order('updatetime','desc')->select();
 
         $data = [];
         if(empty($res)){
