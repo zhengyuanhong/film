@@ -5,12 +5,12 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    index_url: 'team/index' + location.search,
-                    add_url: 'team/add',
-                    edit_url: 'team/edit',
-                    del_url: 'team/del',
-                    multi_url: 'team/multi',
-                    table: 'team',
+                    index_url: 'focus/index' + location.search,
+                    add_url: 'focus/add',
+                    edit_url: 'focus/edit',
+                    del_url: 'focus/del',
+                    multi_url: 'focus/multi',
+                    table: 'focus',
                 }
             });
 
@@ -25,13 +25,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {checkbox: true},
                         {field: 'id', title: __('Id')},
-                        {field: 'user_name', title: __('User_name')},
-                        {field: 'user_img', title: __('User_img')},
-                        {field: 'work', title: __('Work')},
-                        {field: 'skill', title: __('Skill')},
-                        {field: 'wechat', title: __('Wechat')},
-                        {field: 'phone', title: __('Phone')},
-                        {field: 'motto', title: __('Motto')},
+                        {field: 'user_id', title: __('User_id')},
+                        {field: 'video_id', title: __('Video_id')},
                         {field: 'updatetime', title: __('Updatetime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'createtime', title: __('Createtime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}

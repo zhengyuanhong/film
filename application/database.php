@@ -18,11 +18,11 @@ return [
     // 服务器地址
     'hostname'        => Env::get('database.hostname', '127.0.0.1'),
     // 数据库名
-    'database'        => Env::get('database.database', 'wiki_hellozheng_'),
+    'database'        => Env::get('database.database', 'film_hellozheng'),
     // 用户名
-    'username'        => Env::get('database.username', 'wiki_hellozheng_'),
+    'username'        => Env::get('database.username', 'film_hellozheng'),
     // 密码
-    'password'        => Env::get('database.password', 'mDBXZ8HAeszmmAiY'),
+    'password'        => Env::get('database.password', 'aDfaM4NAPTM6eFHy'),
     // 端口
     'hostport'        => Env::get('database.hostport', ''),
     // 连接dsn

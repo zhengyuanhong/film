@@ -7,7 +7,8 @@ use think\Model;
 
 class Focus extends Model
 {
-    // 表名
+
+  // 表名
     protected $table = 'focus';
 
     // 自动写入时间戳字段
@@ -42,6 +43,6 @@ class Focus extends Model
             return true;
         }
     }
+
+
 }
-
-

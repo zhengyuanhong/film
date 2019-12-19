@@ -9,19 +9,19 @@ use app\common\controller\Backend;
  *
  * @icon fa fa-circle-o
  */
-class WechatUser extends Backend
+class Focus extends Backend
 {
     
     /**
-     * WechatUser模型对象
-     * @var \app\admin\model\WechatUser
+     * Focus模型对象
+     * @var \app\admin\model\Focus
      */
     protected $model = null;
 
     public function _initialize()
     {
         parent::_initialize();
-        $this->model = new \app\admin\model\WechatUser;
+        $this->model = new \app\admin\model\Focus;
 
     }
     

@@ -4,7 +4,7 @@ namespace app\admin\validate;
 
 use think\Validate;
 
-class WechatUser extends Validate
+class Focus extends Validate
 {
     /**
      * 验证规则
